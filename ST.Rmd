@@ -34,7 +34,7 @@ Primeiro, fazemos uma suposição sobre a forma ou formato funcional de $f$. Ap�
 
 Ajustar um modelo mais flexível requer estimar um número maior de parâmetros. Esses modelos mais complexos podem levar a um fenômeno *overfitting* dos dados, o que significa que eles levam aos erros (ou ruídos) muito perto.
 
-![Exemplo de *overfitting*](img/overfiting.PNG)
+![<span style="color:gray">Exemplo de *overfitting*</span>](img/overfiting.PNG)
 
 
 ### Métodos não paramétricos
@@ -51,7 +51,7 @@ Os métodos não paramétricos não fazem suposições explícitas sobre a forma
   
   
 ### Compensação entre a precisão da previsão e a interpretabilidade do modelo
-![Uma representação do equilíbrio entre flexibilidade e interpretabilidade, usando diferentes métodos de aprendizagem estatística. Em geral, à medida que a flexibilidade de um método aumenta, sua interpretabilidade diminui.](img/2-7.png)
+![<span style="color:gray">Uma representação do equilíbrio entre flexibilidade e interpretabilidade, usando diferentes métodos de aprendizagem estatística. Em geral, à medida que a flexibilidade de um método aumenta, sua interpretabilidade diminui.</span>](img/2-7.png)
 
 ## Avaliação da precisão do modelo
 ### Medindo a qualidade do ajuste
@@ -59,8 +59,7 @@ Mean Squared Error (MSE)
 
 $MSE = \frac{1}{n} \displaystyle \sum_{i = 1}^{n} (y_i - \hat{f}(x_i))^2$
 
-![*Mean Squared Error* entre as variáveis *Sales* e *TV*, do dataset *Advertising*. Cada segmento de linha cinza representa um erro, e o ajuste faz um compromisso calculando a média de seus quadrados. Neste caso, um ajuste linear captura a essência de a relação, embora seja um pouco deficiente.](img/mse.PNG)
-
+![<span style="color:gray">*Mean Squared Error* entre as variáveis *Sales* e *TV*, do dataset *Advertising*. Cada segmento de linha cinza representa um erro, e o ajuste faz um compromisso calculando a média de seus quadrados. Neste caso, um ajuste linear captura a essência de a relação, embora seja um pouco deficiente.</span>](img/mse.PNG)
 
 ### A compensação de viés-variância
 $E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_0)) + [Bias(\hat{f}(x_0))]^2 + Var(\epsilon)$
@@ -92,7 +91,7 @@ Lembre-se que assumimos a existência de uma relação verdadeira (e linear) ent
 
 Aqui $\beta_0$ é o termo de interceptação, ou seja, o valor esperado de $Y$ quando $X = 0$, e $\beta_1$ é a inclinação, o aumento médio em $Y$ associado a um aumento de uma unidade em $X$.
 
-![Esquerda: A linha vermelha representa a relação verdadeira, $f(X) = 2 + 3X$. A linha azul é a linha de mínimos quadrados, uma estimativa via mínimos quadrados para $f(X)$ com base nos dados observados, mostrados em preto. Direita: A linha de regressão é novamente mostrada em vermelho e a linha de mínimos quadrados em azul escuro. Em azul claro, dez linhas de mínimos quadrados, cada uma calculada com base em um conjunto aleatório separado de observações.](img/reg.PNG)
+![<span style="color:gray">Esquerda: A linha vermelha representa a relação verdadeira, $f(X) = 2 + 3X$. A linha azul é a linha de mínimos quadrados, uma estimativa via mínimos quadrados para $f(X)$ com base nos dados observados, mostrados em preto. Direita: A linha de regressão é novamente mostrada em vermelho e a linha de mínimos quadrados em azul escuro. Em azul claro, dez linhas de mínimos quadrados, cada uma calculada com base em um conjunto aleatório separado de observações.</span>](img/reg.PNG)
 
 Podemos nos perguntar quão próximos $\beta_0$ e $\beta_1$ estão dos verdadeiros valores. Para calcular os erros padrão associados a $\beta_0$ e $\beta_1$, usamos as seguintes fórmulas para os **erros padrão**:
 
@@ -136,7 +135,7 @@ Table: Coeficientes do modelo de mínimos quadrados para uma regressão entre as
 
 Na Tabela, note que os coeficientes $\hat{\beta_0}$ e $\hat{\beta_1}$ são bem maiores que seus erros padrão, o que faz com que a $t$-statística seja grande também, tornando o $p$-valor pequeno. Esse $p$-valor pequeno para a interceptação indica que podemos rejeitar a hipótese nula de que $\hat{\beta_0} = 0$, e um $p$-valor um pequeno para *TV* indica que podemos rejeitar a hipótese nula de que $\hat{\beta_1} = 0$. Rejeitando a hipótese nula, permite-nos concluir que existe uma relação entre as variáveis *Sales* e *TV*.
 
-![*Mean Squared Error* entre as variáveis *Sales* e *TV*, do dataset *Advertising*. Cada segmento de linha cinza representa um erro.](img/mse.PNG)
+![<span style="color:gray">*Mean Squared Error* entre as variáveis *Sales* e *TV*, do dataset *Advertising*. Cada segmento de linha cinza representa um erro.</span>](img/mse.PNG)
 
 
 ## Acessando a acurácia do modelo
@@ -177,22 +176,22 @@ Table: Mais informações sobre a regressão sobre *Sales* e *TV*.
 ## Problemas potenciais
 1. **Não linearidade das relações preditor de resposta**: resíduos não podem apresentar padrões
 
-![Gráficos de resíduos versus valores preditos (ou ajustados) para o conjunto de dados Auto. Em cada gráfico, a linha vermelha é um ajuste suave para os resíduos, com o objetivo de facilitar a identificação de uma tendência. Esquerda: Uma regressão linear de *mpg* em *horsepower*. Uma forte padrão nos resíduos indica não linearidade nos dados. À direita: uma regressão linear de *mpg* em *horsepower* e $horsepower^2$. Existe um pequeno padrão no residuais.](img/3-9.png)
+![<span style="color:gray">Gráficos de resíduos versus valores preditos (ou ajustados) para o conjunto de dados Auto. Em cada gráfico, a linha vermelha é um ajuste suave para os resíduos, com o objetivo de facilitar a identificação de uma tendência. Esquerda: Uma regressão linear de *mpg* em *horsepower*. Uma forte padrão nos resíduos indica não linearidade nos dados. À direita: uma regressão linear de *mpg* em *horsepower* e $horsepower^2$. Existe um pequeno padrão no residuais.</span>](img/3-9.png)
 
 2. **Correlação de termos de erro** (contexto de séries temporais): resíduos não podem apresentar padrões
 
-![Gráficos de resíduos de conjuntos de dados de série temporal simulados gerados com diferentes níveis de correlação entre termos de erro para pontos de tempo adjacentes.](img/3-10.png)
+![<span style="color:gray">Gráficos de resíduos de conjuntos de dados de série temporal simulados gerados com diferentes níveis de correlação entre termos de erro para pontos de tempo adjacentes.</span>](img/3-10.png)
 
 3. **Variância não constante dos termos de erro**: outra suposição importante do modelo de regressão linear é que os termos de erro têm uma variância constante.
 
-![Parcelas residuais. Em cada gráfico, a linha vermelha é um ajuste suave para os resíduos, com o objetivo de facilitar a identificação de uma tendência. As linhas azuis rastreiam os quantis externos dos resíduos e enfatizam os padrões. Esquerda: a forma do funil indica heterocedasticidade. Direita: O preditor foi transformado em log, e agora não há evidências de heterocedasticidade.](img/3-11.png)
+![<span style="color:gray">Parcelas residuais. Em cada gráfico, a linha vermelha é um ajuste suave para os resíduos, com o objetivo de facilitar a identificação de uma tendência. As linhas azuis rastreiam os quantis externos dos resíduos e enfatizam os padrões. Esquerda: a forma do funil indica heterocedasticidade. Direita: O preditor foi transformado em log, e agora não há evidências de heterocedasticidade.</span>](img/3-11.png)
 
 *Heteroscedasticidade ou Heterocedasticidade é o fenômeno estatístico que ocorre quando o modelo de hipótese apresenta variâncias para $Y$ e $X$ não iguais em todas as observações*
 
 
 4. **Outliers**: um ponto para o qual $y_i$ está longe do valor previsto. Outliers podem surgir por uma variedade de razões, como registro incorreto de uma observação durante a coleta de dados.
 
-![A linha de regressão de mínimos quadrados é mostrada em vermelho, e o a linha de regressão após a remoção do outlier é mostrada em azul.](img/3-3.PNG)
+![<span style="color:gray">A linha de regressão de mínimos quadrados é mostrada em vermelho, e o a linha de regressão após a remoção do outlier é mostrada em azul.</span>](img/3-3.PNG)
 
 5. **Pontos de alta alavancagem**: outliers em $X$.
 
@@ -423,9 +422,9 @@ A ideia de penalizar pela soma dos quadrados dos parâmetros também é usada em
 ## LASSO
 Na Ridge Regression, aumentar o valor de $\lambda$ tende a reduzir a magnitude dos coeficientes, mas não os exclui. Veja:
 
-![Linhas de contorno das funções de erro e restrição para o LASSO (esquerda) e Ridge Regression (direita). As áreas em azul sólido são as regiões de restrição, $|\beta_1| + |\beta_2| \leq s$ e $\beta_1^2 + \beta_2^2 \leq s$, enquanto as elipses vermelhas são os contornos de RSS.](img/6-7.png)
+![<span style="color:gray">Linhas de contorno das funções de erro e restrição para o LASSO (esquerda) e Ridge Regression (direita). As áreas em azul sólido são as regiões de restrição, $|\beta_1| + |\beta_2| \leq s$ e $\beta_1^2 + \beta_2^2 \leq s$, enquanto as elipses vermelhas são os contornos de RSS.</span>](img/6-7.png)
 
-![Ridge Regression e as estimativas de LASSO para uma configuração simples com $n = p$ e $X$ uma matriz diagonal unitária. Esquerda: As estimativas de coeficiente de Ridge Regression são reduzidas proporcionalmente para zero, em relação às estimativas de mínimos quadrados. Direita: As estimativas de LASSO são suavizadas para zero](img/6-10.PNG)
+![<span style="color:gray">Ridge Regression e as estimativas de LASSO para uma configuração simples com $n = p$ e $X$ uma matriz diagonal unitária. Esquerda: As estimativas de coeficiente de Ridge Regression são reduzidas proporcionalmente para zero, em relação às estimativas de mínimos quadrados. Direita: As estimativas de LASSO são suavizadas para zero</span>](img/6-10.PNG)
 
 $\displaystyle RSS + \lambda \displaystyle \sum_{j=1}^p|\beta_j|$
 
@@ -530,7 +529,7 @@ Se $\phi_{11} = 0.839$ e $\phi_{21} = 0.544$, e $\phi_{11}^2 + \phi_{21}^2 = 1$,
 
 Há também outra interpretação para o PCA: o primeiro vetor define a linha que está o mais próxima possível dos dados. A suposição implícita é que a resposta tenderá a variar mais nas direções de alta variância das entradas. Muitas vezes, essa é uma suposição razoável, uma vez que os preditores costumam ser escolhidos para estudo porque variam com a variável de resposta, mas não precisam ser válidos em geral.
 
-![A linha sólida verde indica o primeiro componente principal, e a linha tracejada azul indica o segundo componente principal.](img/6-14.png)
+![<span style="color:gray">A linha sólida verde indica o primeiro componente principal, e a linha tracejada azul indica o segundo componente principal.</span>](img/6-14.png)
 
 Sistematicamente, pode ser feito por decomposição em autovalores de uma matriz covariância, geralmente depois de centralizar (e normalizar) a matriz de dados para cada variável. Os resultados podem ser discutidos em termos pontuações de componentes, e carregamentos (loadings), isto é, o peso pelo qual cada variável normalizada original deve ser multiplicada para se obter a pontuação de componente.
 
@@ -541,14 +540,14 @@ Matematicamente, é definido como uma transformação linear ortogonal que trans
   * Problema de autovalor/autovetor na matriz de correlações;
   * Necessário escalar as variáveis para deixá-las na mesma unidade de medida;
 
-![Dois plots de componentes principais para os dados do USArests. Esquerda: variáveis escaladas para ter desvios padrão unitários. À direita: componentes principais usando dados fora de escala. Assault tem de longe o maior carregamento no primeiro componente principal porque tem a maior variação entre as quatro variáveis. Em geral, escalar as variáveis para ter um desvio padrão é recomendado.](img/10-3.png)
+![<span style="color:gray">Dois plots de componentes principais para os dados do USArests. Esquerda: variáveis escaladas para ter desvios padrão unitários. À direita: componentes principais usando dados fora de escala. Assault tem de longe o maior carregamento no primeiro componente principal porque tem a maior variação entre as quatro variáveis. Em geral, escalar as variáveis para ter um desvio padrão é recomendado.</span>](img/10-3.png)
 
 ## Proporção da variância explicada (PVE)
 Quanto da informação é perdida quando fazemos a projeção do PCA?
 
 $\displaystyle PVE(z_m^{th}) = \frac{\sum_{i=1}^n\sum_{j=1}^p \phi_{jm} x_{ij}^2}{\sum_{i=1}^n\sum_{j=1}^p x_{ij}^2} = \frac{\mbox{variância da m-ésima componente}}{\mbox{variância total}}$
 
-![Esquerda: um screeplot representando a proporção da variância explicada por cada um dos quatro componentes principais nos dados USArests. À direita: a proporção cumulativa da variância explicada pelos quatro componentes principais no USArests.](img/10-4.png)
+![<span style="color:gray">Esquerda: um screeplot representando a proporção da variância explicada por cada um dos quatro componentes principais nos dados USArests. À direita: a proporção cumulativa da variância explicada pelos quatro componentes principais no USArests.</span>](img/10-4.png)
 
 Nos dados USArrests, o primeiro componente principal explica 62,0\% da variância dos dados, e o próximo componente principal explica 24,7\% da variância. Juntos, os dois primeiros componentes principais explicam quase 87\% da variância nos dados, e os dois últimos componentes principais explicam apenas 13\% da variância.
 
@@ -582,21 +581,21 @@ Depois de padronizar os preditores $p$, o PLS calcula a primeira direção $Z_1$
 
 Dividimos o intervalo de $X$ em regiões e ajustamos uma constante diferente em cada região.
 
-![Esquerda: A curva sólida exibe o valor ajustado de uma regressão de mínimos quadrados usando funções de passo. As curvas pontilhadas indicam um intervalo de confiança estimado de 95%. À direita: regressão logística, novamente usando funções de passo.](img/7-2.png)
+![<span style="color:gray">Esquerda: A curva sólida exibe o valor ajustado de uma regressão de mínimos quadrados usando funções de passo. As curvas pontilhadas indicam um intervalo de confiança estimado de 95%. À direita: regressão logística, novamente usando funções de passo.</span>](img/7-2.png)
 
 ## Polinômios por partes
 
 A cada região uma interpolação polinomial.
 
-![Superior esquerdo: Polinômios cúbicos irrestritos. Superior direito: Polinômios cúbicos restritos a serem contínuos em Age = 50. Inferior esquerdo: Polinômios cúbicos restritos a serem contínuos e ter primeira e segunda derivadas contínuas. Inferior direito: Spline linear a qual é restrita a ser contínua.](img/7-3.png)
+![<span style="color:gray">Superior esquerdo: Polinômios cúbicos irrestritos. Superior direito: Polinômios cúbicos restritos a serem contínuos em Age = 50. Inferior esquerdo: Polinômios cúbicos restritos a serem contínuos e ter primeira e segunda derivadas contínuas. Inferior direito: Spline linear a qual é restrita a ser contínua.</span>](img/7-3.png)
 
 4. **Restrições e Splines**: adicionar restrições (e.g. polinômios por partes devem ser contínuos e suaves: $1^a$ e $2^a$ derivadas contínuas no nó).
 
-![Spline cúbica e Spline cúbica natural, com três nós.](img/7-4.png)
+![<span style="color:gray">Spline cúbica e Spline cúbica natural, com três nós.</span>](img/7-4.png)
 
 Obs: Splines naturais são utilizados para minimizar a variância.
 
-![Spline versus polinômio, ambos com 15 graus de liberdade.](img/7-7.png)
+![<span style="color:gray">Spline versus polinômio, ambos com 15 graus de liberdade.</span>](img/7-7.png)
 
 ## Suavização de splines
 
@@ -611,7 +610,7 @@ O termo adicionado é o montante no qual a inclinação está mudando. Quanto ma
 
 Procedimento com memória, utilizando apenas as observações vizinhas
 
-![Regressão local ilustrada em alguns dados simulados, onde a curva azul representa $f(x)$ a partir da qual os dados foram gerados, e a curva laranja claro corresponde à estimativa de regressão local $\hat{f(x)}$. Os pontos de cor laranja são locais para o ponto alvo $x_0$, representado pela linha vertical laranja. O formato de sino amarelo sobreposto no gráfico indica os pesos atribuídos a cada ponto, diminuindo a zero com a distância do ponto alvo. O ajuste $\hat{f(x_0)}$ em $x_0$ é obtido ajustando uma regressão linear ponderada (segmento de linha laranja) e usando o valor ajustado em $x_0$ (ponto sólido laranja) como a estimativa $\hat{f(x_0)}$.](img/7-9.png)
+![<span style="color:gray">Regressão local ilustrada em alguns dados simulados, onde a curva azul representa $f(x)$ a partir da qual os dados foram gerados, e a curva laranja claro corresponde à estimativa de regressão local $\hat{f(x)}$. Os pontos de cor laranja são locais para o ponto alvo $x_0$, representado pela linha vertical laranja. O formato de sino amarelo sobreposto no gráfico indica os pesos atribuídos a cada ponto, diminuindo a zero com a distância do ponto alvo. O ajuste $\hat{f(x_0)}$ em $x_0$ é obtido ajustando uma regressão linear ponderada (segmento de linha laranja) e usando o valor ajustado em $x_0$ (ponto sólido laranja) como a estimativa $\hat{f(x_0)}$.</span>](img/7-9.png)
 
 ## Modelos aditivos generalizados (GAM)
 
