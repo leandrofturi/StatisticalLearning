@@ -54,12 +54,13 @@ Os métodos não paramétricos não fazem suposições explícitas sobre a forma
 ![<span style="color:gray">Uma representação do equilíbrio entre flexibilidade e interpretabilidade, usando diferentes métodos de aprendizagem estatística. Em geral, à medida que a flexibilidade de um método aumenta, sua interpretabilidade diminui.</span>](img/2-7.png)
 
 ## Avaliação da precisão do modelo
-### Medindo a qualidade do ajuste
+### Ajustando um modelo
 Mean Squared Error (MSE)
 
 $MSE = \frac{1}{n} \displaystyle \sum_{i = 1}^{n} (y_i - \hat{f}(x_i))^2$
 
 ![<span style="color:gray">*Mean Squared Error* entre as variáveis *Sales* e *TV*, do dataset *Advertising*. Cada segmento de linha cinza representa um erro, e o ajuste faz um compromisso calculando a média de seus quadrados. Neste caso, um ajuste linear captura a essência de a relação, embora seja um pouco deficiente.</span>](img/mse.PNG)
+
 
 ### A compensação de viés-variância
 $E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_0)) + [Bias(\hat{f}(x_0))]^2 + Var(\epsilon)$
@@ -83,6 +84,76 @@ $\frac{\partial S_r}{\partial \beta_0} = \displaystyle \sum_{i = 1}^{n} 2(y_i - 
 $\frac{\partial S_r}{\partial \beta_1} = \displaystyle \sum_{i = 1}^{n} 2(y_i - (\beta_0 + \beta_1x_i))(-x_i) = 0$
   
 Pode acontecer que as colunas de $X$ não sejam linearmente independentes. Isso ocorreria, por exemplo, se duas das entradas estivessem perfeitamente correlacionadas, (por exemplo, $x_2 = 3x_1$). Então $X^T X$ é singular e os coeficientes de mínimos quadrados $\beta$ não são definidos de forma única. Uma maneira natural de resolver a representação não única é recodificando e/ou **eliminando colunas redundantes em $X$**.
+
+## Caso geral
+*[Algoritmos Numéricos, profa Lúcia Catabriga](http://www.inf.ufes.br/~luciac/cn/calc_num.html)*
+
+Problema com $n$ experimentos e $m$ parâmetros:
+
+$y = a_1 g_1(x) + a_2 g_2(x) + \cdots + a_m g_m(x) + \epsilon$
+
+Min $S_r$ = Min $\sum\limits_{k=1}^n (\, y_k - (a_1 
+g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,)^2$
+
+Condições de mínimo: $\frac{\partial S_r}{\partial a_1} = \frac{\partial 
+S_r}{\partial a_2} = \cdots = \frac{\partial S_r}{\partial a_m} = 0$
+
+onde $S_r = S_r(a_1,a_2,\cdots,a_m)$.
+
+\begin{eqnarray*}
+ \frac{\partial S_r}{\partial a_1} &=& \sum\limits_{k=1}^n 2(y_k - (\, a_1 
+g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,) (-g_1(x_k)) = 0 \\
+  \frac{\partial S_r}{\partial a_2} &=& \sum\limits_{k=1}^n 2(y_k - (\, 
+a_1 g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,) (-g_2(x_k)) = 0 \\
+ \vdots && \\
+\frac{\partial S_r}{\partial a_m} &=& \sum\limits_{k=1}^n 2(y_k - (\, 
+a_1 g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,) (-g_m(x_k)) = 0
+\end{eqnarray*}
+
+\azz{Equações Normais} (sistema simétrico $m \times m$):
+\[
+\begin{bmatrix}
+ \sum\limits_{k=1}^n g_1 g_1 & \sum\limits_{k=1}^n g_1 g_2 & \cdots & 
+ \sum\limits_{k=1}^n g_1 g_m \\
+ \sum\limits_{k=1}^n g_2 g_1 & \sum\limits_{k=1}^n g_2 g_2 & \cdots & 
+ \sum\limits_{k=1}^n g_2 g_m \\
+   &    &  \ddots   &   \\
+\sum\limits_{k=1}^n g_m g_1 & \sum\limits_{k=1}^n g_m g_2 & \cdots & 
+\sum\limits_{k=1}^n g_m g_m
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\ a_2 \\  \\ \vdots \\ a_m
+\end{bmatrix}
+\begin{bmatrix}
+\sum\limits_{k=1}^n g_1 y_k \\ \sum\limits_{k=1}^n g_2 y_k \\ \vdots \\ 
+\sum\limits_{k=1}^n g_m y_k
+\end{bmatrix}
+\]
+
+\vspace*{12pt}
+onde $\;\; g_i = g_i(x_k), \,\,\, i = 1,2, \cdots, m$
+
+Se $\bar{g_1}, \bar{g_2}, \cdots, \bar{g_m}$ formam um conjunto 
+\azz{linearmente independente} 
+
+\vspace*{6pt}
+$\Rightarrow$ que o determinante do sistema normal é diferente de 
+zero 
+
+\vspace*{6pt}
+$\Rightarrow$ que o sistema tem solução única. 
+
+\vspace*{6pt}
+Além disso, demonstra-se que que esta solução é o mínimo de 
+$S_r(a_1,a_2,\cdots,a_m)= \sum\limits_{k=1}^n (\, y_k - (a_1 
+g_1(x_k) + \cdots + a_m g_m(x_k)) \,)^2$.
+\[
+\bar{g_j} = 
+\begin{bmatrix}
+ g_j(x_1) \\ g_j(x_2) \\ \cdots \\ g_j(x_n)
+\end{bmatrix},
+\;\;\;\; j = 1,2, \cdots ,m
+\]
 
 
 ## Avaliando a precisão das estimativas de coeficiente
@@ -121,11 +192,9 @@ $t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})}$
 
 que mede o número de desvios padrão que $\hat{\beta_1}$ está longe de $0$.
 
-Se realmente não houver relação entre $X$ e $Y$, então esperamos que a equação tenha uma distribuição $t$ com $n - 2$ graus de liberdade. A distribuição $t$ tem uma forma de sino e para valores de $n$ maiores que aproximadamente $30$ é bastante semelhante à distribuição normal.
+Consequentemente, é simples calcular a probabilidade de observar qualquer valor igual a $|t|$ ou maior, assumindo $\beta_1 = 0$. Chamamos essa probabilidade de $p$-valor. O interpretamos da seguinte maneira: um $p$-valor pequeno indica que é improvável que se observe uma associação substancial entre o preditor e a resposta devido ao acaso, **na ausência de qualquer associação real**.
 
-Consequentemente, é simples calcular a probabilidade de observar qualquer valor igual a $|t|$ ou maior, assumindo $\beta_1 = 0$. Chamamos essa probabilidade de $p$-valor. O interpretamos da seguinte maneira: um $p$-valor pequeno indica que é improvável que se observe uma associação substancial entre o preditor e a resposta devido ao acaso, na ausência de qualquer associação real.
-
-Portanto, se vemos um $p$-valor pequeno, podemos inferir que há uma associação entre o preditor e o resposta, e rejeitamos a hipótese nula.
+**Portanto, se vemos um $p$-valor pequeno, podemos inferir que há uma associação entre o preditor e o resposta, e rejeitamos a hipótese nula**.
 
 |                         | Coefficient | sdt. error | t-statistic | p-value  |
 |-------------------------|-------------|------------|-------------|----------|
@@ -213,7 +282,11 @@ Se $VIF = 1$, falta de colinearidade completa; $VIF > 5$ ou $10$, indica problem
 library(MASS)
 library(ggplot2)
 
-# A biblioteca MASS contém o conjunto de dados de Boston, que registra medv (valor médio da casa) para 506 bairros ao redor de Boston. Buscaremos prever medv utilizando 13 preditores, como rm (número médio de quartos por casa), idade (idade média das casas) e lstat (percentual de domicílios com baixo nível socioeconômico).
+# A biblioteca MASS contém o conjunto de dados de Boston, 
+#  que registra medv (valor médio da casa) para 506 bairros ao redor de Boston. 
+#  Buscaremos prever medv utilizando 13 preditores, como rm (número médio de 
+#  quartos por casa), idade (idade média das casas) e lstat (percentual de 
+#  domicílios com baixo nível socioeconômico).
 
 names(Boston)
 
@@ -242,6 +315,7 @@ abline(0,0)
 
 
 ```{r}
+# Vamos ajustar outro modelo
 lm.fit2=lm(medv ~ lstat + I(lstat^2))
 summary(lm.fit2)
 
@@ -252,83 +326,16 @@ ggplot(Boston, aes(lstat, medv)) +
 plot(fitted(lm.fit2), residuals(lm.fit2))
 abline(0,0)
 
-# O valor de p próximo de zero associado ao termo quadrático sugere que ele leva a um modelo aprimorado. Usamos a função anova() para quantificar ainda mais a extensão em que o ajuste quadrático é superior ao ajuste linear.
+
+# O valor de p próximo de zero associado ao termo quadrático sugere que ele 
+#  leva a um modelo aprimorado. Usamos a função anova() para quantificar ainda 
+#  mais a extensão em que o ajuste quadrático é superior ao ajuste linear.
 
 anova(lm.fit, lm.fit2)
 ```
 
 O modelo `lm.fit` representa o submodelo linear contendo apenas um preditor, `lstat`, enquanto o modelo `lm.fit2` corresponde ao modelo quadrático que possui dois preditores, `lstat` e `lstat^2`. A função `anova()` realiza um teste de hipótese comparando os dois modelos. A hipótese nula é que os dois modelos ajustam os dados igualmente bem, e a hipótese alternativa é que o modelo completo é superior. Aqui, a estatística F é 135 e o valor p associado é virtualmente zero. Isso fornece evidências muito claras de que o modelo que contém os preditores `lstat` e `lstat^2` é muito superior ao modelo que contém apenas o preditor `lstat`.
 
-
-## Caso geral
-*[Algoritmos Numéricos, profa Lúcia Catabriga](http://www.inf.ufes.br/~luciac/cn/calc_num.html)*
-
-Problema com $n$ experimentos e $m$ parâmetros:
-
-$y = a_1 g_1(x) + a_2 g_2(x) + \cdots + a_m g_m(x) + \epsilon$
-
-Min $S_r$ = Min $\sum\limits_{k=1}^n (\, y_k - (a_1 
-g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,)^2$
-
-Condições de mínimo: $\frac{\partial S_r}{\partial a_1} = \frac{\partial 
-S_r}{\partial a_2} = \cdots = \frac{\partial S_r}{\partial a_m} = 0$
-
-onde $S_r = S_r(a_1,a_2,\cdots,a_m)$.
-
-\begin{eqnarray*}
- \frac{\partial S_r}{\partial a_1} &=& \sum\limits_{k=1}^n 2(y_k - (\, a_1 
-g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,) (-g_1(x_k)) = 0 \\
-  \frac{\partial S_r}{\partial a_2} &=& \sum\limits_{k=1}^n 2(y_k - (\, 
-a_1 g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,) (-g_2(x_k)) = 0 \\
- \vdots && \\
-\frac{\partial S_r}{\partial a_m} &=& \sum\limits_{k=1}^n 2(y_k - (\, 
-a_1 g_1(x_k) + a_2 g_2(x_k) + \cdots + a_m g_m(x_k)) \,) (-g_m(x_k)) = 0
-\end{eqnarray*}
-
-\azz{Equações Normais} (sistema simétrico $m \times m$):
-\[
-\begin{bmatrix}
- \sum\limits_{k=1}^n g_1 g_1 & \sum\limits_{k=1}^n g_1 g_2 & \cdots & 
- \sum\limits_{k=1}^n g_1 g_m \\
- \sum\limits_{k=1}^n g_2 g_1 & \sum\limits_{k=1}^n g_2 g_2 & \cdots & 
- \sum\limits_{k=1}^n g_2 g_m \\
-   &    &  \ddots   &   \\
-\sum\limits_{k=1}^n g_m g_1 & \sum\limits_{k=1}^n g_m g_2 & \cdots & 
-\sum\limits_{k=1}^n g_m g_m
-\end{bmatrix}
-\begin{bmatrix}
-a_1 \\ a_2 \\  \\ \vdots \\ a_m
-\end{bmatrix}
-\begin{bmatrix}
-\sum\limits_{k=1}^n g_1 y_k \\ \sum\limits_{k=1}^n g_2 y_k \\ \vdots \\ 
-\sum\limits_{k=1}^n g_m y_k
-\end{bmatrix}
-\]
-
-\vspace*{12pt}
-onde $\;\; g_i = g_i(x_k), \,\,\, i = 1,2, \cdots, m$
-
-Se $\bar{g_1}, \bar{g_2}, \cdots, \bar{g_m}$ formam um conjunto 
-\azz{linearmente independente} 
-
-\vspace*{6pt}
-$\Rightarrow$ que o determinante do sistema normal é diferente de 
-zero 
-
-\vspace*{6pt}
-$\Rightarrow$ que o sistema tem solução única. 
-
-\vspace*{6pt}
-Além disso, demonstra-se que que esta solução é o mínimo de 
-$S_r(a_1,a_2,\cdots,a_m)= \sum\limits_{k=1}^n (\, y_k - (a_1 
-g_1(x_k) + \cdots + a_m g_m(x_k)) \,)^2$.
-\[
-\bar{g_j} = 
-\begin{bmatrix}
- g_j(x_1) \\ g_j(x_2) \\ \cdots \\ g_j(x_n)
-\end{bmatrix},
-\;\;\;\; j = 1,2, \cdots ,m
-\]
 
 
 # Seleção de modelos lineares
@@ -400,10 +407,6 @@ which.min(reg.summary$bic)
 
 # A linha superior de cada gráfico contém um quadrado preto para cada variável selecionada de acordo com o modelo ideal associado a essa estatística. Por exemplo, vemos que vários modelos compartilham um BIC próximo a -150. No entanto, o modelo com o BIC mais baixo é o modelo de seis variáveis que contém apenas AtBat, Hits, Walks, CRBI, DivisionW e PutOuts, que são as que chegam "até o topo".
 plot(regfit.full, scale="bic")
-
-# Vemos que usando a seleção progressiva, o melhor modelo de uma variável contém apenas CRBI, e o melhor modelo de duas variáveis inclui adicionalmente Hits
-regfit.fwd=regsubsets(Salary ~ ., data=Hitters, nvmax=19, method="forward")
-summary(regfit.fwd)
 ```
 
 
@@ -454,17 +457,10 @@ grid = 10^seq(10, -2, length=100) # valores de lambda de 10^10 até 10^-2
 
 # Por default, as variáveis já são padronizadas
 
-# Podemos ver no gráfico de coeficiente que dependendo da escolha do parâmetro de ajuste, alguns dos coeficientes serão exatamente iguais a zero.
 
-# Cada curva corresponde a uma variável. Ele mostra o caminho de seu coeficiente em relação à norma \ell_1 de todo o vetor de coeficientes à medida que \lambda varia. O eixo acima indica o número de coeficientes diferentes de zero no \lambda atual, que são os graus de liberdade efetivos X para o LASSo
+# Lasso
 lasso.mod = glmnet(x, y, alpha=1, lambda=grid)
-suppressWarnings(plot(lasso.mod))
-
-# cv.glmnet() executa validação cruzada dez vezes
-cv.out.lasso = cv.glmnet(x[train,], y[train], alpha=1)
-
-# Inclui a curva de validação cruzada (linha pontilhada vermelha), e curvas de desvio padrão superior e inferior ao longo da sequência de \lambda. Dois \lambda são selecionados e indicados pelas linhas pontilhadas verticais.
-plot(cv.out.lasso)
+cv.out.lasso = cv.glmnet(x[train,], y[train], alpha=1) # cv.glmnet() executa validação cruzada dez vezes
 bestlam = cv.out.lasso$lambda.min
 log(bestlam)
 
@@ -472,13 +468,12 @@ lasso.pred = predict(lasso.mod, s=bestlam, newx=x[test,])
 mean((lasso.pred - y[test])^2)
 
 
-# Fazendo a Ridge Regression
+# Ridge Regression
 ridge.mod = glmnet(x, y, alpha=0, lambda=grid)
-suppressWarnings(plot(ridge.mod))
-
 cv.out.ridge = cv.glmnet(x[train,], y[train], alpha=0)
 bestlam = cv.out.ridge$lambda.min
 log(bestlam)
+
 ridge.pred = predict(ridge.mod, s=bestlam, newx=x[test,])
 mean((ridge.pred - y[test])^2)
 
